@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dn.mapper.UserMapper">
+    <select id="queryUserList" resultType="User"> select * from author_login</select>
+    <select id="queryPostList" resultType="Post"> select * from author_post</select>
+    <insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="aid">insert into
+    author_login(aid,author,password,status,avatar)values(#{aid},#{author},#{password},#{status},#{avatar})
+    </insert>
+    <update id="insertAvatar" parameterType="User">
+        UPDATE author_login SET avatar=#{avatar} WHERE aid=#{aid}
+    </update>
+    <select id="queryAid" resultType="User"> select * from author_login where author = #{author}</select>
+    <select id="queryAvatar" resultType="User"> select * from author_login where aid = #{aid}</select>
+    <insert id="insertPost" parameterType="Post" useGeneratedKeys="true" keyProperty="postId">insert into
+    author_post(postId,aid,date,disease,imgSrc,detail,avatar)values(#{postId},#{aid},#{date},#{disease},#{imgSrc},#{detail},#{avatar})
+    </insert>
+    <select id="testName" resultType="int"> select count(*) from author_login where author = #{author}</select>
+</mapper>
